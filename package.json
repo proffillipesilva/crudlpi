@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "tsc": "tsc",
-    "start": "node build/index.js"
+    "tsc": "tsc --watch",
+    "start": "node build/index.js",
+    "dev": "nodemon build/index.js"
   },
   "repository": {
     "type": "git",
