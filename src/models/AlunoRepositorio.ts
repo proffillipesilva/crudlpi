@@ -1,11 +1,6 @@
+import { AppDataSource } from "../data-source";
 import Aluno from "./Aluno";
-import Repositorio from "./Repositorio";
 
-class AlunoRepositorio extends Repositorio<Aluno> {
-    get_name(): string {
-        return "tb_alunos";
-    }
-    
-}
+const AlunoRepositorio = AppDataSource.getRepository(Aluno);
 
-export default AlunoRepositorio
+export default AlunoRepositorio;

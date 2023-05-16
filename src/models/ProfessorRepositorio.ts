@@ -1,12 +1,6 @@
+import { AppDataSource } from "../data-source";
 import Professor from "./Professor";
-import Repositorio from "./Repositorio";
 
-class ProfessorRepositorio extends Repositorio<Professor> {
-    get_name(): string {
-        return "tb_professores";
-    }
-    
-
-}
+const ProfessorRepositorio = AppDataSource.getRepository(Professor);
 
 export default ProfessorRepositorio;

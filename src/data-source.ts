@@ -1,5 +1,6 @@
 import { DataSource } from "typeorm";
 import Aluno from "./models/Aluno";
+import Professor from "./models/Professor";
 
 export const AppDataSource = new DataSource({
     type: "mysql",
@@ -10,7 +11,7 @@ export const AppDataSource = new DataSource({
     database: "crudlpi",
     synchronize: true,
     logging: true,
-    entities: [Aluno],
+    entities: [Aluno, Professor],
     subscribers: [],
     migrations: [],
 })

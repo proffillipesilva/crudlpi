@@ -14,12 +14,16 @@ app.get('/app/hello', (req: Request, res: Response) => {
     res.json('Hello Fillipe')
 })
 
-app.get('/app/alunos', (req:Request, res: Response) => {
+app.get('/app/alunos', async (req:Request, res: Response) => {
     const alunoService = AlunoService.getInstance();
-    res.json(alunoService.getAlunos());
+    res.json(await alunoService.getAlunos());
 })
-app.get('/app/professores', (req:Request, res: Response) => {
-    res.json(new ProfessorRepositorio().getAll());
+app.post('/app/alunos', async (req:Request, res: Response) => {
+    const alunoService = AlunoService.getInstance();
+    const aluno = req.body;
+    const alunoCriado = await alunoService.saveAluno(aluno)
+    console.log(alunoCriado)
+    res.json(alunoCriado)
 })
 
 app.listen(38000, () => {
