@@ -1,5 +1,5 @@
-import Aluno from "../models/Aluno";
-import AlunoRepositorio from "../models/AlunoRepositorio";
+import Aluno from "../models/entities/Aluno";
+import AlunoRepositorio from "../models/repositories/AlunoRepositorio";
 
 class AlunoService {
 

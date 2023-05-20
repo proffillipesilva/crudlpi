@@ -1,4 +1,4 @@
-import DB from "./DBMock";
+/*import DB from "./DBMock";
 
 abstract class Repositorio<T> {
     abstract get_name() : string;
@@ -27,3 +27,4 @@ abstract class Repositorio<T> {
 }
 
 export default Repositorio;
+*/

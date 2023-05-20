@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm";
-import Aluno from "./models/Aluno";
-import Professor from "./models/Professor";
+import Aluno from "./models/entities/Aluno";
+import Professor from "./models/entities/Professor";
 
 export const AppDataSource = new DataSource({
     type: "mysql",
