@@ -2,8 +2,8 @@ import express, { Request, Response } from "express";
 import "reflect-metadata"
 import { AppDataSource } from "./data-source";
 import AlunoController from "./controllers/aluno.controller";
-import { validate } from "./middlewares/validate";
-import { AlunoSchema } from "./models/dto/AlunoDto";
+import { validateRequest } from "zod-express-middleware";
+import { AlunoSchema } from "./models/schemas";
 
 const app = express();
 app.use(express.json());
@@ -16,7 +16,7 @@ app.get('/app/hello',  (req: Request, res: Response) => {
 })
 
 app.get('/app/alunos', AlunoController.getInstance().getAlunos)
-app.post('/app/alunos', validate(AlunoSchema), AlunoController.getInstance().saveAluno)
+app.post('/app/alunos', validateRequest({body: AlunoSchema}), AlunoController.getInstance().saveAluno)
 
 app.listen(38000, () => {
     console.log('Iniciando o servidor')
