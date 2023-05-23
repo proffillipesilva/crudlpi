@@ -27,6 +27,14 @@ class AlunoController {
         const alunoService = AlunoService.getInstance();
         res.json(await alunoService.getAlunos());
     }
+
+    public async insertPhoto(req: Request, res: Response){
+        const file = req.file as Express.Multer.File;
+        const rm = parseInt(req.params.rm);
+        await AlunoService.getInstance().insertPhoto(rm, file);
+        res.json('Foto enviada')
+
+    }
 }
 
 export default AlunoController;

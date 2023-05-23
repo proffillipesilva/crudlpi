@@ -9,6 +9,8 @@ class Aluno {
     nome: string;
     @Column()
     curso: string;
+    @Column({nullable: true})
+    photo: string;
 }
 
 export default Aluno;
