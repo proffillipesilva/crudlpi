@@ -25,10 +25,30 @@ class AlunoService {
         return await AlunoRepositorio.find();
     }
 
-    public async insertPhoto(rm: number, file: Express.Multer.File) : Promise<void> {
-        const aluno = await AlunoRepositorio.findOneBy({rm});
+    public async getAlunoById(id: string) : Promise<Aluno | null> {
+        return await AlunoRepositorio.findOneBy({ id });
+    }
+
+    public async deleteAlunoById(id: string) : Promise<void> {
+        await AlunoRepositorio.delete({ id })
+    }
+
+    public async updateAlunoById(id: string, aluno: Aluno) : Promise<void> {
+        const alunoAtual = await AlunoRepositorio.findOneBy({ id });
+        if(alunoAtual){
+            alunoAtual.curso = aluno.curso;
+            alunoAtual.nome = aluno.nome;
+            alunoAtual.rm = aluno.rm;
+            await AlunoRepositorio.save(alunoAtual)
+        }
+        
+        Promise.resolve();
+    }
+
+    public async insertPhoto(id: string, file: Express.Multer.File) : Promise<void> {
+        const aluno = await AlunoRepositorio.findOneBy({id});
         console.log(aluno);
-        const nomeImagem = `avatar_${rm}.jpg`;
+        const nomeImagem = `avatar_${id}.jpg`;
         if(aluno){
             if(file == null) return;
             const image = await Jimp.read(file.path);

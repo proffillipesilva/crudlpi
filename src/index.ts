@@ -1,25 +1,24 @@
 import express, { Request, Response } from "express";
 import "reflect-metadata"
 import { AppDataSource } from "./data-source";
-import AlunoController from "./controllers/aluno.controller";
-import { validateRequest } from "zod-express-middleware";
-import { AlunoSchema } from "./models/schemas";
-import upload from "./middlewares/storage";
+import morgan from 'morgan';
+import cors from 'cors'
+import favicon from 'serve-favicon'
+import alunoRouter from "./routes/aluno.router";
 
 const app = express();
 app.use(express.json());
 
+app.use(cors())
+
 app.use(express.static('public'));
 
+app.use(favicon('public/favicon.ico'))
 
-app.get('/app/hello',  (req: Request, res: Response) => {
-    res.json('Hello Fillipe')
-})
+app.use(morgan('combined'))
 
-app.get('/app/alunos', AlunoController.getInstance().getAlunos)
-app.post('/app/alunos', validateRequest({body: AlunoSchema}), AlunoController.getInstance().saveAluno)
+app.use('/app/alunos', alunoRouter)
 
-app.put('/app/alunos/:rm/photo', upload.single('avatar'), AlunoController.getInstance().insertPhoto )
 
 app.listen(38000, () => {
     console.log('Iniciando o servidor')

@@ -28,12 +28,37 @@ class AlunoController {
         res.json(await alunoService.getAlunos());
     }
 
-    public async insertPhoto(req: Request, res: Response){
-        const file = req.file as Express.Multer.File;
-        const rm = parseInt(req.params.rm);
-        await AlunoService.getInstance().insertPhoto(rm, file);
-        res.json('Foto enviada')
+    public async getAlunoById(req: Request, res: Response) {
+        const alunoService = AlunoService.getInstance();
+        const id = req.params.id;
+        res.json(await alunoService.getAlunoById(id));
+    }
 
+    public async deleteAlunoById(req: Request, res: Response) {
+        const alunoService = AlunoService.getInstance();
+        const id = req.params.id;
+        await alunoService.deleteAlunoById(id);
+        res.json('ok');
+    }
+
+    public async updateAlunoById(req: Request, res: Response) {
+        const alunoService = AlunoService.getInstance();
+        const id = req.params.id;
+        const aluno = req.body;
+        await alunoService.updateAlunoById(id, aluno);
+        res.json('ok');
+    }
+
+    public async insertPhoto(req: Request, res: Response){
+        try{
+        const file = req.file as Express.Multer.File;
+        const id = req.params.id;
+        await AlunoService.getInstance().insertPhoto(id, file);
+        res.json('Foto enviada')
+        } catch(error){
+            console.log(error);
+            res.status(500).end('error')
+        }
     }
 }
 

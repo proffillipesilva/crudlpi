@@ -1,9 +1,11 @@
-import { Entity, PrimaryColumn, Column } from "typeorm";
+import { Entity, PrimaryColumn, Column, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity()
 class Aluno {
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn("uuid")
+    id: string;
+    @Column({unique: true})
     rm: number;
     @Column()
     nome: string;

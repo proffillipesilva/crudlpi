@@ -1,4 +1,4 @@
-import {z } from 'zod'
+import { z } from 'zod'
 
 const AlunoSchema = z.object({
     rm: z.coerce.number().min(1000),
@@ -7,7 +7,7 @@ const AlunoSchema = z.object({
 })
 
 const AlunoIdSchema = z.object({
-    rm: z.coerce.number().min(1000)
+    id: z.string()
 })
 
 export { AlunoSchema, AlunoIdSchema }
